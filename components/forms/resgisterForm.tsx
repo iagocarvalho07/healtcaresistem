@@ -1,19 +1,15 @@
-"use client";
-
-import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { Form } from "@/components/ui/form"
-import CustomFormfield, { FormFieldType } from '../ui/CustomFormfield'
-import SubmitButton from '../ui/SubmitButton'
-import { UserFormValidation } from '@/lib/validation'
-import { useRouter } from 'next/navigation'
-import { createUser } from '@/lib/actions/paciente.actions'
+import CustomFormfield, { FormFieldType } from '../ui/CustomFormfield';
+import SubmitButton from '../ui/SubmitButton';
+import { Form } from '../ui/form';
+import { UserFormValidation } from '@/lib/validation';
+import { createUser } from '@/lib/actions/paciente.actions';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-
-
-const Pacienteform = () => {
+const ResgisterForm = ({user}: {user:User}) => {
     const router = useRouter();
     const [isLoadindState, setIsLoadingState] = React.useState(false)
 
@@ -44,10 +40,14 @@ const Pacienteform = () => {
     }
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-                <section className='mb-12 space-y-4'>
-                    <h2 className='header'>Hi there</h2>
-                    <p className='text-dark-600'>shedule your appointment</p>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
+                <section className='space-y-4'>
+                    <h2 className='header'>Welcome</h2>
+                    <p className='text-dark-600'>Nos conte mais sobre voçe </p>
+                </section>
+                <section className='space-y-6'>
+            
+                    <p className='text-dark-600'>Informações pessoais </p>
                 </section>
                 <CustomFormfield
                     fieldType={FormFieldType.INPUT}
@@ -57,10 +57,25 @@ const Pacienteform = () => {
                     placeholder="John Doe"
                     iconSrc='/assets/icons/user.svg'
                     iconAlt='user'
-
-
                 />
-                <CustomFormfield
+
+
+                <SubmitButton isLoading={isLoadindState} >
+                    Get Started
+                </SubmitButton>
+            </form>
+        </Form>
+    )
+}
+
+export default ResgisterForm
+
+
+
+
+{/**
+    
+                    <CustomFormfield
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
                     name="email"
@@ -78,13 +93,8 @@ const Pacienteform = () => {
                     label="phone number"
                     placeholder="(55) 123456789"
                 />
-
-                <SubmitButton isLoading={isLoadindState} >
-                    Get Started
-                </SubmitButton>
-            </form>
-        </Form>
-    )
-}
-
-export default Pacienteform
+    
+    
+    
+    
+    */}
